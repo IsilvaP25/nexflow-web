@@ -126,18 +126,18 @@
                         <h2>¿Listo para dar el <span class="gradient-text">siguiente paso</span>?</h2>
                         <p>Cuéntanos sobre tu proyecto y te responderemos en menos de 24 horas.</p>
                     </div>
-                    <form id="contact-form">
+                    <form id="contact-form" action="https://formspree.io/f/mqenqevv" method="POST">
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" id="name" placeholder="Tu nombre" required>
+                            <input type="text" id="name" name="name" placeholder="Tu nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="tu@email.com" required>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Detalles del Proyecto</label>
-                            <textarea id="message" rows="6" placeholder="Por favor, describe tu idea, objetivos y cualquier requerimiento técnico específico. Mientras más detalles nos brindes, mejor podremos preparar una cotización precisa y acorde a tus necesidades." required></textarea>
+                            <textarea id="message" name="message" rows="6" placeholder="Por favor, describe tu idea, objetivos y cualquier requerimiento técnico específico. Mientras más detalles nos brindes, mejor podremos preparar una cotización precisa y acorde a tus necesidades." required></textarea>
                             <span class="form-hint">Cuéntanos sobre tus objetivos, funcionalidades clave y tiempos estimados.</span>
                         </div>
                         <button type="submit" class="btn-primary full-width">Enviar Propuesta</button>

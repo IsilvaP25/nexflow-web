@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Run once on load
 
-    // Form Handling
+    // Form Handling (Real submission with Formspree)
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerText;
@@ -38,18 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerText = 'Enviando...';
             btn.disabled = true;
 
-            // Simulate API call
-            setTimeout(() => {
-                btn.innerText = '¡Mensaje Recibido!';
-                btn.style.background = '#10b981'; // Success green
-                contactForm.reset();
-                
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    btn.innerText = '¡Mensaje Recibido!';
+                    btn.style.background = '#10b981'; // Success green
+                    contactForm.reset();
+                } else {
+                    throw new Error('Error en el envío');
+                }
+            } catch (error) {
+                btn.innerText = 'Error al enviar';
+                btn.style.background = '#ef4444'; // Error red
+            } finally {
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.background = '';
                     btn.disabled = false;
-                }, 3000);
-            }, 1500);
+                }, 4000);
+            }
         });
     }
 
